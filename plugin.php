@@ -49,12 +49,30 @@ function simplify_install()
 
 function simplify_admin_theme_header($request)
 {
-   //find the absolute path!
-   //include 'simplify.php';
-var_dump($_SERVER);
-   ?>
-   <link rel="stylesheet" type="text/css" href="" />
-	<?php
+	$styles = "";//we'll concatenate each thing we do here.
+	$db = get_db();
+	$mysql = 'SELECT * FROM '. $db->prefix .'elements
+		WHERE 
+		element_set_id = "1" 
+		ORDER BY '. $db->prefix .'elements.order ASC';
+	$our_crazy_array = $db->fetchAll($mysql);	
+	$count_crazy_array = count($our_crazy_array);
+	for($x=0;$x<$count_crazy_array;$x++)
+	{
+		//there should be 15 of these. Unless someone hacked and modified the code...
+	 	$thisone = get_option('simplifyon'.$our_crazy_array[$x][id].'');
+		if($thisone == "no")
+			{
+				//first, parse the ID into the div. 
+				//the id of the fields on the admin
+				//side look like this: id="element-50"
+				$lowerme	= strtolower($our_crazy_array[$x][name]);
+				$styles .= "#dublin-core-". $lowerme ."{display:none;}";
+				$styles .=	"#element-". $our_crazy_array[$x][id] ."{display: none;}";
+			}
+	}
+   queue_css_string($styles, $media = 'all', $conditional = false);
+
 }
 
 function simplify_public_theme_header($request)

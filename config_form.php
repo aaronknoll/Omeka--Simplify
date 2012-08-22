@@ -6,7 +6,10 @@ $mysql = 'SELECT * FROM '. $db->prefix .'elements
 		ORDER BY '. $db->prefix .'elements.order ASC';
 $our_crazy_array = $db->fetchAll($mysql);	
 $count_crazy_array = count($our_crazy_array);
-echo "$count_crazy_array has  djhdfgjk items";
+echo "<p class='warning'>Please note that Omeka by default
+will always display the Ttile field. This plugin will
+not prevent you from disabling it on the backend, but keep in mind
+it will <strong>always appear</strong> on the front.</p>";
 
 for($x=0;$x<$count_crazy_array;$x++)
 	{

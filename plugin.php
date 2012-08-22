@@ -1,5 +1,4 @@
 <?php
-
 add_plugin_hook('public_theme_header', 'simplify_public_theme_header');
 add_plugin_hook('admin_theme_header', 'simplify_admin_theme_header');
 add_plugin_hook('config_form', 'simplify_config_form');

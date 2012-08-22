@@ -1,4 +1,5 @@
 <?php
+
 $db = get_db();
 $mysql = 'SELECT * FROM '. $db->prefix .'elements
 	WHERE 
